@@ -1,0 +1,16 @@
+csv
+docx
+exe
+jnlp
+jpg
+json
+msi
+pdf
+png
+ps1
+py
+trc
+txt
+xlsx
+xml
+zip
