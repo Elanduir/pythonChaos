@@ -12,7 +12,7 @@ except IOError:
 	print("No include.txt found")
 	print("creating " + includePath)
 	fInc =  open(includePath, "w")
-	fInc.write("included fileextensions - one per line")
+	fInc.write("included extensions - one per line")
 	fInc.close()
 	sys.exit()
 
