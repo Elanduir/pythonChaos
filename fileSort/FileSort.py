@@ -11,8 +11,11 @@ try:
 except IOError:
 	print("No include.txt found")
 	print("creating " + includePath)
-	fInc =  open(includePath, "w")
-	fInc.write("included extensions - one per line")
+	print("added 'exe' and 'txt'")
+	fInc =  open(includePath, "a")
+	fInc.write("included extensions - one per line\n")
+	fInc.write("exe\n")
+	fInc.write("txt\n")
 	fInc.close()
 	sys.exit()
 
