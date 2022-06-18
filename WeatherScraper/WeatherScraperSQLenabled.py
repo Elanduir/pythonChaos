@@ -20,10 +20,6 @@ config = {
     "database": "db_weather"
 }
 
-proxFile = open('resources/proxies.txt', 'r')
-prox = proxFile.readlines()
-proxLength = len(prox) -1
-
 db = mysql.connector.connect(**config)
 dbcursor = db.cursor()
 sqlW = "INSERT INTO 5610_wohlen_cache (date_created, temperature, humidity, pressure) VALUES (%s, %s, %s, %s)"
@@ -32,9 +28,7 @@ sqlL = "INSERT INTO 5600_lenzburg_cache (date_created, temperature, humidity, pr
 while(True):
     fDate = datetime.now().strftime('%Y-%m-%d %H:%M')
     
-    proxy_index = random.randint(0, proxLength)
-    proxy = {"http": prox[proxy_index], "https": prox[proxy_index]}
-    pageW = requests.get(URL_wohlen, proxies=proxy)
+    pageW = requests.get(URL_wohlen, proxies=dict(http= 'socks5://proxyaxe.com:9866', https='socks5://proxyaxe.com:9866'))
 
     print(pageW)
 
