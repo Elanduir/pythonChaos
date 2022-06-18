@@ -27,7 +27,15 @@ sqlL = "INSERT INTO 5600_lenzburg_cache (date_created, temperature, humidity, pr
 while(True):
     fDate = datetime.now().strftime('%Y-%m-%d %H:%M')
     
-    pageW = requests.get(URL_wohlen)
+
+    pageW = requests.get(
+        url=URL_wohlen,
+        params={
+            'api_key': 'D132W2C3AJ60FCWT0EVEG6Y006YC27XJMFWXY53XDMEO78AZICQ7IZR4TNW05LEQLC07X51ANF9WEI1O',
+            'url': 'http://httpbin.org/anything?json',  
+        },
+    )
+
     pageL = requests.get(URL_lenzburg)
 
     soupW = BeautifulSoup(pageW.content, "html.parser")
