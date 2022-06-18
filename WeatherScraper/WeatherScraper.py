@@ -1,4 +1,6 @@
 import requests
+import cursor
+import shutil
 from bs4 import BeautifulSoup
 import time
 import os
@@ -11,7 +13,11 @@ humW = ""
 tempL = ""
 humL = ""
 
+cursor.hide()
+
 while(True):
+    columns = shutil.get_terminal_size().columns
+    rows = int(shutil.get_terminal_size().lines / 2 - 1)
     pageW = requests.get(URL_wohlen)
     pageL = requests.get(URL_lenzburg)
 
@@ -36,7 +42,11 @@ while(True):
 
     if cTW != tempW or cHumW != humW:
         clear()
-        print("Temperature: " + tempW + "\nHumidity:    " + humW + "\nPressure:    " +preW)
+        for x in range(0,rows):
+            print("")
+        print(("Temperature: " + tempW).center(columns))
+        print(("Humidity: " + humW).center(columns))
+        print(("Pressure: " +preW).center(columns))
         #print("Temperature: " + tempL + "\nHumidity:    " + humL + "\nPressure:    " +preL)
     time.sleep(30)
 
