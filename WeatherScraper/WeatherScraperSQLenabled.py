@@ -5,6 +5,7 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 import time
 import os
+import random
 
 clear = lambda: os.system('clear')
 
@@ -14,10 +15,14 @@ URL_lenzburg = "http://www.wetterstation-niederlenz.ch/custom.html"
 config = {
     "user": "root",
     "password": "wasser1",
-    "host": "192.168.10.74",
+    "host": "192.168.10.73",
     "port": "3306",
     "database": "db_weather"
 }
+
+proxFile = open('resources/proxies.txt', 'r')
+prox = proxFile.readlines()
+proxLength = len(prox) -1
 
 db = mysql.connector.connect(**config)
 dbcursor = db.cursor()
@@ -27,14 +32,9 @@ sqlL = "INSERT INTO 5600_lenzburg_cache (date_created, temperature, humidity, pr
 while(True):
     fDate = datetime.now().strftime('%Y-%m-%d %H:%M')
     
-
-    pageW = requests.get(
-        url=URL_wohlen,
-        params={
-            'api_key': 'D132W2C3AJ60FCWT0EVEG6Y006YC27XJMFWXY53XDMEO78AZICQ7IZR4TNW05LEQLC07X51ANF9WEI1O',
-            'url': 'http://httpbin.org/anything?json',  
-        },
-    )
+    proxy_index = random.randint(0, proxLength)
+    proxy = {"http": prox[proxy_index], "https": prox[proxy_index]}
+    pageW = requests.get(URL_wohlen, proxies=proxy)
 
     print(pageW)
 
