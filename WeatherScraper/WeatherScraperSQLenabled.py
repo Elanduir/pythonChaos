@@ -36,6 +36,8 @@ while(True):
         },
     )
 
+    print(pageW)
+
     pageL = requests.get(URL_lenzburg)
 
     soupW = BeautifulSoup(pageW.content, "html.parser")
