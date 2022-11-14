@@ -31,7 +31,7 @@ class Path {
 }
 
 async function fetchAsync () {
-    let url = "https://raw.githubusercontent.com/Elanduir/pythonChaos/main/RouteDuration/response14.txt"
+    let url = "https://raw.githubusercontent.com/Elanduir/pythonChaos/main/RouteDuration/responseNew.txt"
     let response = await fetch(url);
     let json = await response.json();
     console.log(json.length);
