@@ -1,6 +1,23 @@
 let paths = [];
 let missing = [];
 let str = "";
+let lookup = {
+    "Wiesen Davos":"13",
+    "Monstein alt Davos":"12",
+    "Monstein neu Davos":"11",
+    "Glaris Davos":"9",
+    "Frauenkirch Davos":"8",
+    "Sertig Davos":"10",
+    "Pauluskirche Davos":"7",
+    "Marienkirche Davos":"5",
+    "St. Johann Davos":"6",
+    "Alexanderhaus Davos":"14",
+    "Englische Kirche Davos":"4",
+    "Herz Jesu Davos":"3",
+    "St. Theodul Davos":"1",
+    "Tschuggen Davos":"2",
+    "Laret Davos":"0",
+};
 class Path {
     constructor() {
         this.id = "";
@@ -14,7 +31,7 @@ class Path {
 }
 
 async function fetchAsync () {
-    let url = "https://raw.githubusercontent.com/Elanduir/pythonChaos/main/RouteDuration/response.txt"
+    let url = "https://raw.githubusercontent.com/Elanduir/pythonChaos/main/RouteDuration/response14.txt"
     let response = await fetch(url);
     let json = await response.json();
     console.log(json.length);
