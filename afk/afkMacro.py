@@ -15,7 +15,7 @@ while True:
     sleep(0.5)
     keyboard.release('1')
     sleep(0.5)
-    mouse.move(-200,200)
+    mouse.move(-200,-200)
     sleep(1)
     keyboard.press('2')
     sleep(0.5)
