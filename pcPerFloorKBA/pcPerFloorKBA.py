@@ -1,9 +1,28 @@
 import csv
 
+# ComputerData class declaration to store all info
+class ComputerData:
+    def __init__(self):
+        self.name = ""
+        self.ci = ""
+        self.location = ""
+        self.model = ""
+        self.status = ""
+        self.mac1 = ""
+        self.mac2 = ""
+        self.userList = []
+        self.arztLogin = False
+
+    def __str__(self):
+        return str(self.name) + "\n" + str(self.ci) + "\n" + str(self.model) + "\n" + str(self.location) +"\n" + str(self.status) + "\n" + str(self.mac1) + "\n" + str(self.mac2) + "\n" + str(self.userList)
+
+
 cleanHost = []
 cleanUser = []
 doc = []
 compLoc = {}
+compDat = {}
+
 with open('resources/Hostnamen.csv') as hostnamenCsv:
     reader = csv.reader(hostnamenCsv, delimiter=',')
     lineCount = 0
@@ -44,27 +63,23 @@ with open('resources/aerzte') as arzt:
         doc.append(line.strip())
 
 
-class ComputerData:
-    def __init__(self):
-        self.name = ""
-        self.location = ""
-        self.userList = []
-        self.arztLogin = False
 
-    def __str__(self):
-        return "Name: " + self.name + "\nLocation: " + self.location + "\nUserList: " + (", ").join(self.userList) + "\nArztLogin: " + str(self.arztLogin)
-
-compDat = {}
 for row in cleanHost:
     if row[0] in compDat:
-        compDat[row[0]].userList.append(row[1])
+        compDat[row[0]].userList.append([row[1], row[2]])
     else:
         cacheComp = ComputerData()
         cacheComp.name = row[0]
-        if row[0] in compLoc:
-            cacheComp.location = compLoc[row[0]]
-        cacheComp.userList.append(row[1])
+        if cacheComp.name in compLoc:
+            cacheComp.ci = compLoc[cacheComp.name][0]
+            cacheComp.model = compLoc[cacheComp.name][5]
+            cacheComp.location = compLoc[cacheComp.name][14]
+            cacheComp.status = compLoc[cacheComp.name][9]
+            cacheComp.mac1 = compLoc[cacheComp.name][15]
+            cacheComp.mac2 = compLoc[cacheComp.name][17]
+        cacheComp.userList.append([row[1], row[2]])
         compDat[row[0]] = cacheComp
 
-for key in compDat:
-    print(compDat[key])
+
+for row in compDat:
+    print(compDat[row])
