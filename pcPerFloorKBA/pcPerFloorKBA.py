@@ -23,20 +23,9 @@ class ComputerData:
     def __iter__(self):
         return iter([self.name, self.ci, self.location, self.model, self.status, self.mac1, self.mac2, self.convertUserlist()])
 
-   
-
     def __str__(self):
         return str(self.name) + "\n" + str(self.ci) + "\n" + str(self.model) + "\n" + str(self.location) +"\n" + str(self.status) + "\n" + str(self.mac1) + "\n" + str(self.mac2) + "\n" + str(self.userList)
 
-migPath = 'resources/migData'
-cleanHost = []
-cleanUser = []
-doc = []
-compLoc = {}
-compDat = {}
-user0802 = []
-user0803 = []
-comp0802 = []
 
 def userFilter(compList, userList):
     result = [];
@@ -53,7 +42,15 @@ def writeCompCSV(fileLoc, compList):
         for comp in compList:
             wr.writerow(list(comp))
     
-
+migPath = 'resources/migData'
+cleanHost = []
+cleanUser = []
+doc = []
+compLoc = {}
+compDat = {}
+user0802 = []
+user0803 = []
+comp0802 = []
 
 with open('resources/Hostnamen.csv') as hostnamenCsv:
     reader = csv.reader(hostnamenCsv, delimiter=',')
